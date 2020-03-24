@@ -9,7 +9,13 @@ public class BottleDispenser {
     private double money;
     public ArrayList<Bottle> pullotList;
 
-    public BottleDispenser() {
+    private static BottleDispenser bottleDispenser = new BottleDispenser();
+
+    public static BottleDispenser getInstance(){
+        return bottleDispenser;
+    }
+
+    private BottleDispenser() {
         bottles = 5;
         money = 0;
 
