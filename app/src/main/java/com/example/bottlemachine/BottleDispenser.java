@@ -51,7 +51,7 @@ public class BottleDispenser {
         return bottles;
     }
 
-    public void addMoney() {
+    void addMoney() {
         money += 1;
         System.out.println("Klink! Added more money!");
     }
