@@ -22,33 +22,32 @@ public class MainActivity extends AppCompatActivity {
 
         textViewSeek = (TextView) findViewById(R.id.textViewSeek);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+        textView = (TextView) findViewById(R.id.textView);
 
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewSeek.setText(""+ progress + "€");
+                textViewSeek.setText(""+ progress + "");
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
-
     }
-
-    public void addMoney(View v){
+    public void setTextData(String s){
+        textView.setText(s);
+    }
+    public void insertMoney(View v){
         input = textViewSeek.getText().toString();
-        textView.setText("Money added: " +input);
         int money = Integer.parseInt(input);
-        //bottleDispenser.addMoney(money);
-
+        setTextData(bottleDispenser.addMoney(money));
+        seekBar.setProgress(0);
     }
-
+    public void returnCoins(View v){
+        setTextData(bottleDispenser.returnMoney());
+    }
 }

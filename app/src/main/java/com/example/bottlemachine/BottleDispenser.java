@@ -51,9 +51,9 @@ public class BottleDispenser {
         return bottles;
     }
 
-    void addMoney() {
-        money += 1;
-        System.out.println("Klink! Added more money!");
+    String addMoney(int m) {
+        money += m;
+        return("Klink! Added more money!");
     }
 
     private void printList(ArrayList<Bottle> pullolista) {
@@ -92,9 +92,11 @@ public class BottleDispenser {
         }
     }
 
-    public void returnMoney() {
+    String returnMoney() {
         String palautus = String.format("%.2f", money);
-        System.out.println("Klink klink. Money came out! You got "+palautus+"€ back");
+        money = 0;
+        return("Klink klink. Money came out! You got "+palautus+"€ back");
+
     }
 }
 
