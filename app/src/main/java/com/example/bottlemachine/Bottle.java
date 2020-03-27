@@ -7,7 +7,7 @@ public class Bottle {
     private double cost;
     private double size;
 
-    public Bottle(String name, String manufacturer, double total_energy, double cost, double size){
+    Bottle(String name, String manufacturer, double total_energy, double cost, double size){
         this.name = name;
         this.manufacturer = manufacturer;
         this.total_energy = total_energy;
@@ -15,7 +15,7 @@ public class Bottle {
         this.size = size;
     }
 
-    public String getName(){
+    String getName(){
         return name;
     }
     public String getManufacturer(){
@@ -24,10 +24,10 @@ public class Bottle {
     public double getEnergy(){
         return total_energy;
     }
-    public double getCost() {
+    double getCost() {
         return cost;
     }
-    public double getSize() {
+    double getSize() {
         return size;
     }
 }

@@ -7,11 +7,11 @@ public class BottleDispenser {
 
     private int bottles;
     private double money;
-    public ArrayList<Bottle> pullotList;
+    private ArrayList<Bottle> pullotList;
 
     private static BottleDispenser bottleDispenser = new BottleDispenser();
 
-    public static BottleDispenser getInstance(){
+    static BottleDispenser getInstance(){
         return bottleDispenser;
     }
 
@@ -35,19 +35,19 @@ public class BottleDispenser {
         setPullolista(pullot);
     }
 
-    public void setPullolista(ArrayList<Bottle> pullolista) {
+    private void setPullolista(ArrayList<Bottle> pullolista) {
         pullotList = pullolista;
     }
 
-    public ArrayList<Bottle> getPullolista(){
+    private ArrayList<Bottle> getPullolista(){
         return pullotList;
     }
 
-    public double getMoney() {
+    private double getMoney() {
         return money;
     }
 
-    public int getBottles() {
+    private int getBottles() {
         return bottles;
     }
 
@@ -56,7 +56,7 @@ public class BottleDispenser {
         System.out.println("Klink! Added more money!");
     }
 
-    public void printList(ArrayList<Bottle> pullolista) {
+    private void printList(ArrayList<Bottle> pullolista) {
         Bottle currentBottle;
         ArrayList<Bottle> pullotLista = getPullolista();
         for(int i = 0; i < pullotLista.size(); i++) {
