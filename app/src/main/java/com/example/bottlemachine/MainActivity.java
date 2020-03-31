@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
     BottleDispenser bottleDispenser = BottleDispenser.getInstance();
@@ -14,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView textView;
     String input;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         textViewSeek = (TextView) findViewById(R.id.textViewSeek);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         textView = (TextView) findViewById(R.id.textView);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<Bottle> bottleAdapter = new ArrayAdapter<Bottle>(this, android.R.layout.simple_spinner_item, bottleDispenser.getPullolista());
+        bottleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(bottleAdapter);
 
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -38,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void setTextData(String s){
         textView.setText(s);
     }
@@ -50,4 +59,8 @@ public class MainActivity extends AppCompatActivity {
     public void returnCoins(View v){
         setTextData(bottleDispenser.returnMoney());
     }
+    public void chooseBottle(){
+
+    }
+
 }

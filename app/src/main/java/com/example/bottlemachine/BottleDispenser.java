@@ -7,7 +7,7 @@ public class BottleDispenser {
 
     private int bottles;
     private double money;
-    private ArrayList<Bottle> pullotList;
+    public ArrayList<Bottle> pullotList;
 
     private static BottleDispenser bottleDispenser = new BottleDispenser();
 
@@ -39,7 +39,7 @@ public class BottleDispenser {
         pullotList = pullolista;
     }
 
-    private ArrayList<Bottle> getPullolista(){
+    public ArrayList<Bottle> getPullolista(){
         return pullotList;
     }
 
@@ -56,7 +56,7 @@ public class BottleDispenser {
         return("Klink! Added more money!");
     }
 
-    private void printList(ArrayList<Bottle> pullolista) {
+    public void printList(ArrayList<Bottle> pullolista) {
         Bottle currentBottle;
         ArrayList<Bottle> pullotLista = getPullolista();
         for(int i = 0; i < pullotLista.size(); i++) {

@@ -6,6 +6,10 @@ public class Bottle {
     private double total_energy;
     private double cost;
     private double size;
+    @Override
+            public String toString(){
+        return manufacturer+" "+name+" "+size+"l "+total_energy+"cal "+cost+"€";
+    }
 
     Bottle(String name, String manufacturer, double total_energy, double cost, double size){
         this.name = name;
