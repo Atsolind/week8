@@ -1,7 +1,6 @@
 package com.example.bottlemachine;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BottleDispenser {
 
@@ -66,29 +65,20 @@ public class BottleDispenser {
         }
     }
 
-    public void buyBottle(ArrayList<Bottle> pullolista) {
-        Scanner scanner = new Scanner(System.in);
-        printList(pullotList);
-        System.out.print("Your choice: ");
-        int valinta = scanner.nextInt();
-        Bottle currentBottle;
+    public String buyBottle(Bottle pullo) {
         ArrayList<Bottle> pullotList = getPullolista();
-        currentBottle = pullotList.get(valinta-1);
 
-        if (getMoney() < currentBottle.getCost()) {
-            System.out.println("Add money first!");
+        if (getMoney() == 0 ||  getMoney() < pullo.getCost()) {
+            return ("Add money first!");
         }
-
         else if (getBottles() == 0) {
-            System.out.println("Out of bottles!");
+            return ("Out of bottles!");
         }
-
         else{
-            System.out.println("KACHUNK! " +currentBottle.getName()+" came out of the dispenser!");
             bottles -= 1;
-            money = (double) (money - currentBottle.getCost());
-            pullotList.remove(valinta - 1);
-
+            money = (double) (money - pullo.getCost());
+            pullotList.remove(pullo);
+            return ("KACHUNK! " +pullo.getName()+" came out of the dispenser!");
         }
     }
 
@@ -96,7 +86,6 @@ public class BottleDispenser {
         String palautus = String.format("%.2f", money);
         money = 0;
         return("Klink klink. Money came out! You got "+palautus+"€ back");
-
     }
 }
 
