@@ -2,6 +2,7 @@ package com.example.bottlemachine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,11 +24,17 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView textView;
     private Spinner spinner;
+    Context context = null;
     Bottle choice;
+    String bottleReceipt = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = MainActivity.this;
+        System.out.println("Tiedostosijainti: ");
+        System.out.println(context.getFilesDir());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         spinner = (Spinner) findViewById(R.id.spinner);
         final ArrayList<Bottle> pullo = bottleDispenser.getPullolista();
+
         ArrayAdapter<Bottle> bottleAdapter = new ArrayAdapter<Bottle>(this, android.R.layout.simple_spinner_item, bottleDispenser.getPullolista());
         bottleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(bottleAdapter);
@@ -45,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -71,7 +83,31 @@ public class MainActivity extends AppCompatActivity {
         setTextData(bottleDispenser.returnMoney());
     }
     public void purchase(View v){
+        bottleReceipt= null;
         setTextData(bottleDispenser.buyBottle(choice));
-    }
+        bottleReceipt = choice.getName()+ " : " + choice.getCost() + "€";
 
+    }
+    public void saveFile(View v){
+        setTextData("Printing receipt.");
+        String fileName = "bottle.txt";
+        OutputStreamWriter outputStreamWriter = null;
+        try {
+            outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStreamWriter.write("************ RECEIPT ************" +"\n");
+            outputStreamWriter.write(bottleReceipt);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
